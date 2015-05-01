@@ -266,7 +266,8 @@
             hour: 'ha',
             day: 'D MMM',
             month: 'MMMM',
-            weekDay: 'dddd'
+            // CUSTOMIZATION: change to dd for Sa Su Mo Tu We Th Fr
+            weekDay: 'dd'    // weekDay: 'dddd'
         };
         var defaultTitleFormats = {
             day: 'dddd D MMMM, YYYY',
@@ -531,6 +532,42 @@
             }
         };
     });
+    // 'use strict';
+    // angular
+    //   .module('mwl.calendar')
+    //   .directive('mwlCalendarSlideBox', function() {
+    //     return {
+    //       restrict: 'EA',
+    //       templateUrl: 'src/templates/calendarSlideBox.html',
+    //       replace: true,
+    //       controller: function($scope, $sce) {
+    //         var vm = this;
+    //         vm.$sce = $sce;
+    //         var unbindWatcher = $scope.$watch('isOpen', function(isOpen) {
+    //           vm.shouldCollapse = !isOpen;
+    //         });
+    //         var unbindDestroy = $scope.$on('$destroy', function() {
+    //           unbindDestroy();
+    //           unbindWatcher();
+    //         });
+    //       },
+    //       controllerAs: 'vm',
+    //       require: ['^?mwlCalendarMonth', '^?mwlCalendarYear'],
+    //       link: function(scope, elm, attrs, ctrls) {
+    //         scope.isMonthView = !!ctrls[0];
+    //         scope.isYearView = !!ctrls[1];
+    //       },
+    //       scope: {
+    //         isOpen: '=',
+    //         events: '=',
+    //         onEventClick: '=',
+    //         editEventHtml: '=',
+    //         onEditEventClick: '=',
+    //         deleteEventHtml: '=',
+    //         onDeleteEventClick: '='
+    //       }
+    //     };
+    //   });
     'use strict';
     angular.module('mwl.calendar').directive('mwlCalendarMonth', function () {
         return {
@@ -687,6 +724,15 @@
                 'calendarDebounce',
                 function ($scope, $timeout, moment, calendarTitle, calendarDebounce) {
                     var vm = this;
+                    // CUSTOMIZATION: adding a day change function to the controller
+                    vm.changeDate = function (date) {
+                        console.log('clicked day = ', moment(date).toDate());
+                        console.log('currentDay before click = ', $scope.currentDay);
+                        $scope.currentDay = moment(date).toDate();
+                        console.log('currentDay after click = ', $scope.currentDay);
+                        $scope.listDate = moment(date).toDate();
+                        console.log('listDate is another variable that is set... just in case it messes anything up... = ', $scope.listDate);
+                    };
                     vm.changeView = function (view, newDay) {
                         $scope.view = view;
                         $scope.currentDay = newDay;

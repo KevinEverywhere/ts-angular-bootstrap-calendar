@@ -1,8 +1,23 @@
 'use strict';
 
 angular
-  .module('demo', ['mwl.calendar', 'ui.bootstrap'])
+  .module('reflectCalendar', ['mwl.calendar', 'ui.bootstrap'])
   .controller('MainCtrl', function ($scope, $modal, moment) {
+
+    // IDEAS 
+    // function parseEvents = function (eventObject) {var scheduledEvents = [
+    // grab object
+    // create two arrays (scheduled, unscheduled);
+    // loop through and push into the appropriate array;
+
+    // ng-repeat over the arrays
+    //   add watch for isScheduled
+
+
+
+
+
+
 
     var currentYear = moment().year();
     var currentMonth = moment().month();
@@ -10,24 +25,80 @@ angular
     //These variables MUST be set as a minimum for the calendar to work
     $scope.calendarView = 'month';
     $scope.calendarDay = new Date();
+    
+
+    $scope.logDay = function (day) {
+      console.log("Angelo" + getEventsInPeriod($scope.calendarDay));
+
+    }
+    
+
+
     $scope.events = [
       {
-        title: 'Event 1',
+        title: 'Evidence for Announced Observation',
+
+        //ts-only-attributes
+        assessmentPartId: 1443810,
+        scheduled: false,
+        startTime: null,
+        state: "NOT_STARTED",
+        complete: false,
+        description: "Educator uses this to upload artifacts to support the Final SLO Score.",
+
+        actorType: "TEACHER",
+        actorId: 733505,
+        actorLastNameFirstName: "Teacher01, MMSD",
+        actorName: "MMSD Teacher01",
+
+        //angular-bootstrap-calendar, default attributes for 
         type: 'warning',
         startsAt: new Date(currentYear,currentMonth,25,8,30),
         endsAt: new Date(currentYear,currentMonth,25,9,30)
       },
       {
-        title: 'Event 2',
+        title: 'Evidence for Announced Observation',
         type: 'info',
+        scheduled: true,
         startsAt: new Date(currentYear,currentMonth,19,7,30),
-        endsAt: new Date(currentYear,currentMonth,25,9,30)
+        endsAt: new Date(currentYear,currentMonth,25,9,30),
+        observer: {
+          firstName: 'Scotty',
+          lastName: 'Pipen'
+        }
       },
       {
-        title: 'This is a really long event title',
+        title: 'Evidence for Announced Observation',
         type: 'important',
+        scheduled: true,
         startsAt: new Date(currentYear,currentMonth,25,6,30),
-        endsAt: new Date(currentYear,currentMonth,25,6,60)
+        endsAt: new Date(currentYear,currentMonth,25,6,60),
+        observer: {
+          firstName: 'Michael',
+          lastName: 'Jordan'
+        }
+      },
+      {
+        title: 'No startsAt set',
+        type: 'important',
+        scheduled: false,
+        startsAt: '',
+        endsAt: new Date(currentYear,currentMonth,25,6,60),
+        observer: {
+          firstName: 'Michael',
+          lastName: 'Jordan'
+        }
+      },
+      {
+        title: 'No startsAt set',
+        type: 'important',
+        scheduled: false,
+        startsAt: '',
+        endsAt: new Date(currentYear,currentMonth,25,6,60),
+        observer: {
+          firstName: 'Michael',
+          lastName: 'Jordan'
+        }
       }
     ];
 
