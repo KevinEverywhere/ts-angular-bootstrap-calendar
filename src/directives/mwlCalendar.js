@@ -9,6 +9,7 @@ angular
       restrict: 'EA',
       scope: {
         events: '=',
+        unscheduledEvents: '=',
         view: '=',
         viewTitle: '=',
         currentDay: '=',

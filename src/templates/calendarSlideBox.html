@@ -7,59 +7,69 @@
               No events scheduled for day
             </em></p>
         </div>
-        <div ng-show="events.length > 0" class="event-list-header">
-            <p><em>
-              Scheduled Events
-            </em></p>
-        </div>
-      <li ng-repeat="event in events track by $index">
-<!-- TODO: ngClass to use avatar background color -->
-        <span class="pull-left event" ng-class="'event-' + event.type"></span>
-        &nbsp;
-        
-        <!-- event-list-day-heading -->
-        <span class="event-list-day">
-          {{event.startsAt | date: 'EEEE MMM. dd'}}
-        </span>
-        
-        <!-- event-list-details -->
-        <div class="event-list-details">
-          <div class="event-list-time">
-            {{event.startsAt | date: 'h:mm a'}}
+
+        <!-- START event list -->
+        <div class="row">
+          <!-- START scheduled event list -->
+          <div class="col-xs-12" ng-repeat="event in events track by $index | orderBy: event.partParameters.startTime">
+              <!-- START single event -->
+              <div class="row">
+                  <div class="col-xs-2">
+                      {{event.partParameters.startTime | date: 'EEEE'}}
+                      <br>
+                      {{event.partParameters.startTime | date: 'MMM. dd'}}
+                  </div>
+                  <div class="col-xs-2">
+                      {{event.partParameters.startTime | date: 'h:mm a'}}
+                  </div>
+                  <div class="col-xs-6">
+                      <!-- event icon -->
+                      <span class="tree-left-icon small icon-list-alt"></span>
+                      <span class="event-list-title">
+                        <a
+                          href="javascript:;"
+                          class="event-item"
+                          ng-click="onEventClick({calendarEvent: event})">
+                        {{event.title }}
+                        </a>
+                      </span>
+                      <br>
+                      <span class="event-list-observer">
+                        {{event.assessmentPartType}}
+                        <br>
+                        Observer: {{event.actorLastNameFirstName}}
+                        <!-- {{event.lastNameactorLastNameFirstName}} -->
+                      </span>
+                  </div>
+                  <div class="col-xs-2">
+                      <span ng-show="event.actorId === $scope.currentUserActorId" class="pull-right event-list-action">
+                        <button 
+                          class="btn btn-primary"
+                          ng-click="logDay()">
+                          reschedule</button>
+                      </span>
+                      <a
+                        href="javascript:;"
+                        class="event-item-edit"
+                        ng-if="editEventHtml && event.editable !== false"
+                        ng-bind-html="vm.$sce.trustAsHtml(editEventHtml)"
+                        ng-click="onEditEventClick({calendarEvent: event})">
+                      </a>
+                      <a
+                        href="javascript:;"
+                        class="event-item-delete"
+                        ng-if="deleteEventHtml && event.deletable !== false"
+                        ng-bind-html="vm.$sce.trustAsHtml(deleteEventHtml)"
+                        ng-click="onDeleteEventClick({calendarEvent: event})">
+                      </a>
+                  </div>   
+              </div>
+              <hr class="event-list-separator">  
+              <!-- END single event -->
           </div>
-          <!-- event icon -->
-          <span class="tree-left-icon small icon-list-alt"></span>  
-          <span class="event-list-title">
-            <a
-              href="javascript:;"
-              class="event-item"
-              ng-click="onEventClick({calendarEvent: event})">
-              {{ event.title }}
-            </a>
-          </span>
-          <span class="event-list-observer">
-            {{event.observer.lastName}}, {{event.observer.firstName}}
-          </span>
-        </div>
+          <!-- END scheduled event list -->
 
-        <!-- event-list-action -->
-        <a
-          href="javascript:;"
-          class="event-item-edit"
-          ng-if="editEventHtml && event.editable !== false"
-          ng-bind-html="vm.$sce.trustAsHtml(editEventHtml)"
-          ng-click="onEditEventClick({calendarEvent: event})">
-        </a>
-        <hr>
 
-        <!-- <a
-          href="javascript:;"
-          class="event-item-delete"
-          ng-if="deleteEventHtml && event.deletable !== false"
-          ng-bind-html="vm.$sce.trustAsHtml(deleteEventHtml)"
-          ng-click="onDeleteEventClick({calendarEvent: event})">
-        </a> -->
-      </li>
 
 
     </ul>

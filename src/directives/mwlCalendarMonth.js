@@ -10,6 +10,7 @@ angular
       require: '^mwlCalendar',
       scope: {
         events: '=',
+        unscheduledEvents: '=',
         currentDay: '=',
         onEventClick: '=',
         onEditEventClick: '=',
@@ -19,10 +20,13 @@ angular
         autoOpen: '=',
         onTimespanClick: '='
       },
-      controller: function($scope, moment, calendarHelper) {
+      controller: function($scope, moment, calendarHelper, $log, reflectServices) {
 
         var vm = this;
         var firstRun = true;
+
+        var assessments = reflectServices.practitionerTreeReal.data[1].assessments;
+            $log.debug('INSIDEBOOTSTRAPassessements', assessments);
 
         $scope.$on('calendar.refreshView', function() {
           vm.weekDays = calendarHelper.getWeekDayNames();
@@ -55,7 +59,6 @@ angular
             monthDay.isOpened = false;
           });
 
-          vm.openEvents = day.events;
           vm.openRowIndex = null;
           if (vm.openEvents.length > 0) {
             var dayIndex = vm.view.indexOf(day);
