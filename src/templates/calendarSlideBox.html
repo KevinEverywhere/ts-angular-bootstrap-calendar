@@ -15,34 +15,45 @@
               <!-- START single event -->
               <div class="row">
                   <div class="col-xs-2">
-                      {{event.partParameters.startTime | date: 'EEEE'}}
+                      <span class="scheduled-tasks-date ts-burgundy"
+                            ng-show="event.partParamaters.startTime == vm.day">
+                        TODAY
+                      </span>
+                      <span class="scheduled-tasks-date ts-burgundy">
+                        {{event.partParameters.startTime | date: 'EEEE'}}
+                      </span>
                       <br>
-                      {{event.partParameters.startTime | date: 'MMM. dd'}}
+                      <span class="scheduled-tasks-date ts-burgundy">
+                        {{event.partParameters.startTime | date: 'MMM. dd' }}
+                      </span>
                   </div>
                   <div class="col-xs-2">
-                      {{event.partParameters.startTime | date: 'h:mm a'}}
+                      <span class="scheduled-tasks-time gray-light">
+                        {{event.partParameters.startTime | date: 'h:mm a'}}
+                      </span>
                   </div>
                   <div class="col-xs-6 event-list-primary-details">
                       <!-- event icon -->
-                      <span class="tree-left-icon small icon-list-alt"></span>
-                      <span class="event-list-title">
+                      <span class="small icon-{{ icons[event.assessmentPartType] }} gray-dark">
+                      <span class="event-list-title gray-dark">
                         <a
                           href="javascript:;"
-                          class="event-item"
+                          class="event-item gray-dark"
                           ng-click="onEventClick({calendarEvent: event})">
                         {{event.title }}
                         </a>
                       </span>
                       <br>
-                      <span class="event-list-observer">
-                        {{event.assessmentPartType}}
-                        <br>
+                      <span class="pull-left gray-dark event-list-event-type">
+                        {{event.assessmentPartType | lowercase}}
+                      </span>
+                      <br>
+                      <span class="pull-left gray-dark event-list-observer">
                         Observer: {{event.actorLastNameFirstName}}
-                        <!-- {{event.lastNameactorLastNameFirstName}} -->
                       </span>
                   </div>
                   <div class="col-xs-2">
-                      <span ng-show="event.actorId === $scope.currentUserActorId" class="pull-right event-list-action">
+                      <span ng-show="event.actorId === $scope.currentUserActorId" class="pull-right event-list-action ts-blue">
                         <button 
                           class="btn btn-primary"
                           ng-click="logDay()">
@@ -50,27 +61,24 @@
                       </span>
                       <a
                         href="javascript:;"
-                        class="event-item-edit"
+                        class="pull-right ts-blue event-item-edit"
                         ng-if="editEventHtml && event.editable !== false"
                         ng-bind-html="vm.$sce.trustAsHtml(editEventHtml)"
                         ng-click="onEditEventClick({calendarEvent: event})">
                       </a>
-                      <a
+                      <!-- <a
                         href="javascript:;"
-                        class="event-item-delete"
+                        class="pull-right ts-blue event-item-delete"
                         ng-if="deleteEventHtml && event.deletable !== false"
                         ng-bind-html="vm.$sce.trustAsHtml(deleteEventHtml)"
                         ng-click="onDeleteEventClick({calendarEvent: event})">
-                      </a>
+                      </a> -->
                   </div>   
               </div>
-              <hr class="event-list-separator">  
+              <hr class="event-list-separator" ng-if="!$last">  
               <!-- END single event -->
           </div>
           <!-- END scheduled event list -->
-
-
-
 
     </ul>
 

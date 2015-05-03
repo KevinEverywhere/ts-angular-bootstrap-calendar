@@ -32,6 +32,7 @@ angular
       scope: {
         isOpen: '=',
         events: '=',
+        unscheduledEvents: '=',
         onEventClick: '=',
         editEventHtml: '=',
         onEditEventClick: '=',
