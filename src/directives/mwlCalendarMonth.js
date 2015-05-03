@@ -25,8 +25,7 @@ angular
         var vm = this;
         var firstRun = true;
 
-        var assessments = reflectServices.practitionerTreeReal.data[1].assessments;
-            $log.debug('INSIDEBOOTSTRAPassessements', assessments);
+        
 
         $scope.$on('calendar.refreshView', function() {
           vm.weekDays = calendarHelper.getWeekDayNames();

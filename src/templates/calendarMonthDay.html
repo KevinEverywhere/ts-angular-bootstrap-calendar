@@ -11,21 +11,17 @@
 
 
   <!-- CUSTOMIZATION: Calendar Day -->
-    <div>
       <small
         class="cal-events-num badge badge-important pull-left"
         ng-show="day.badgeTotal > 0">
         {{ day.badgeTotal }}
       </small>
-    </div>
-    <div>
       <span
         class="pull-left calMonthDayNumber"
         data-cal-date
         ng-click="vm.calendarCtrl.changeDate(day.date)">
         {{ day.label }}
       </span>
-    </div>
 
     
   <!-- <span
