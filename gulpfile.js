@@ -53,10 +53,10 @@ gulp.task('css', function() {
     .pipe($.sourcemaps.init())
     .pipe($.less())
     .pipe($.header(banner, { pkg : pkg } ))
-    .pipe($.rename('angular-bootstrap-calendar.css'))
+    .pipe($.rename('ts-angular-bootstrap-calendar.css'))
     .pipe(gulp.dest('dist/css'))
     .pipe($.minifyCss())
-    .pipe($.rename('angular-bootstrap-calendar.min.css'))
+    .pipe($.rename('ts-angular-bootstrap-calendar.min.css'))
     .pipe($.header(banner, { pkg : pkg } ))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest('dist/css'));
@@ -85,8 +85,8 @@ function mergeStreams(stream1, stream2) {
 
 function buildJS(withTemplates) {
 
-  var minFilename = withTemplates ? 'angular-bootstrap-calendar-tpls.min.js' : 'angular-bootstrap-calendar.min.js';
-  var unminfilename = withTemplates ? 'angular-bootstrap-calendar-tpls.js' : 'angular-bootstrap-calendar.js';
+  var minFilename = withTemplates ? 'ts-angular-bootstrap-calendar-tpls.min.js' : 'ts-angular-bootstrap-calendar.min.js';
+  var unminfilename = withTemplates ? 'ts-angular-bootstrap-calendar-tpls.js' : 'ts-angular-bootstrap-calendar.js';
 
   var stream = withTemplates ? mergeStreams(
     gulp.src('src/**/*.js'),
@@ -125,9 +125,6 @@ function release(importance) {
     .pipe(gulp.dest('./'));
 }
 
-gulp.task('release:patch', function() { return release('patch'); });
-gulp.task('release:minor', function() { return release('minor'); });
-gulp.task('release:major', function() { return release('major'); });
 
 gulp.task('default', ['watch'], function() {});
 
@@ -154,7 +151,7 @@ gulp.task('ci:lint', function() {
 function runTests(action, onDistCode) {
   var vendorJs = gulp.src(bowerFiles({includeDev: true})).pipe($.filter('*.js'));
   if (onDistCode) {
-    var appJs = gulp.src('dist/js/angular-bootstrap-calendar-tpls.min.js');
+    var appJs = gulp.src('dist/js/ts-angular-bootstrap-calendar-tpls.min.js');
   } else {
     var appJs = gulp.src('src/**/*.js').pipe($.sort()).pipe($.angularFilesort());
   }
