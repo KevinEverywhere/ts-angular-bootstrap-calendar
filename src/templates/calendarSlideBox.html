@@ -15,9 +15,17 @@
               <!-- START single event -->
               <div class="row">
                   <div class="col-xs-2">
-                      <span class="scheduled-tasks-date ts-burgundy"
-                            ng-show="event.partParamaters.startTime == vm.day">
-                        TODAY
+                      <p>
+                        <span class="scheduled-tasks-date ts-burgundy">
+                          TODAY
+                        </span>
+                      </p>
+                      <p>
+                        <span class="scheduled-tasks-date ts-burgundy">
+                          {{calendarDate}}
+                        </span>
+                      </p>
+                         <br>
                       </span>
                       <span class="scheduled-tasks-date ts-burgundy">
                         {{event.partParameters.startTime | date: 'EEEE'}}
@@ -44,11 +52,11 @@
                         </a>
                       </span>
                       <br>
-                      <span class="pull-left gray-dark event-list-event-type">
+                      <span class="event-list-event-type pull-left gray-dark">
                         {{event.assessmentPartType | lowercase}}
                       </span>
                       <br>
-                      <span class="pull-left gray-dark event-list-observer">
+                      <span class="event-list-observer pull-left gray-dark ">
                         Observer: {{event.actorLastNameFirstName}}
                       </span>
                   </div>
