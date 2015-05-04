@@ -841,6 +841,7 @@
                         vm.view.forEach(function (monthDay) {
                             monthDay.isOpened = false;
                         });
+                        vm.openEvents = day.events;
                         vm.openRowIndex = null;
                         if (vm.openEvents.length > 0) {
                             var dayIndex = vm.view.indexOf(day);
